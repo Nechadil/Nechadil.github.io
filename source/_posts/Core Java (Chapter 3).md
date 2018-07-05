@@ -1,6 +1,6 @@
 ---
 title: Core Java (Chapter 3)
-date: 2018-06-28 19:37:40
+date: 2018-07-05 19:37:40
 tags:
 	- Core Java
 ---
@@ -12,10 +12,10 @@ tags:
 * 整形（byte，short，int，long）：存储空间，范围
 * 浮点（float，double）：单双精度。使用BigDecimal类进行精确计算。
 * 字符(char)：2bytes
-今天下午正好也在研究字符的东西。Java里的char是表示UTF-16 encoding下的code units。比如:```System.out.println("\uD835\uDD6B");```的结果是```𝕫```。注意一个code point是指在Unicode的code page中字符与代码的映射。在不同的caracter encoding下（UTF-8，UTF-16）一个code point对应不同数量的code unit。
+今天下午正好也在研究字符的东西。Java里的char是表示UTF-16 encoding下的code units。比如: System.out.println("\uD835\uDD6B")的结果是zz。注意一个code point是指在Unicode的code page中字符与代码的映射。在不同的caracter encoding下（UTF-8，UTF-16）一个code point对应不同数量的code unit。
 #### 2. 变量
 * final 不可变量
-使用```static final```在类中声明供所有内部方法使用。
+使用static final在类中声明供所有内部方法使用。
 #### 3. 类型转换
 原则是不丢失信息。比如byte => short => int =>long  
 #### 4. enumerated type
