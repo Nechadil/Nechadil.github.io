@@ -20,12 +20,14 @@ tags:
 	* Dependence (use - a): minimize the coupling
 	* Aggregation (has - a)
 	* Inheritance (is - a)
+
 #### 4.2 Using predefined classes
 * Object variable **refers** to an object (not _contains_)
 * Date: a point in time
 	GregorianCalendar: dates in the gregorian calendar notation
 * mutator methods: change instance fields (setter, ...)
 	accessor methods: only accesss instance fields (getter)
+
 #### 4.3 Define a Class
 * implicit param: object before the method (_this_)
 	explicit param: params in the signature of method
@@ -68,6 +70,7 @@ tags:
 	* must be initialized when the object is constructed (in constructure or declairation)
 	* final + primitive type /immutable class
 	* final method/attribut : can't be overwrite/modified
+
 #### 4.4 static fields and methods
 * static
 	* belongs to class not object
@@ -80,6 +83,7 @@ tags:
 * Factory method
 	* static method
 	* creates various objects from a same class
+
 #### 4.5  method parameters
 * call by value: just get the value passed
 	call by reference: method gets the _location_ of the 	variable the caller provides
@@ -89,6 +93,7 @@ tags:
 	* **A method can change the state of an object parameter.**
 	* **A method cannot make an object parameter refer to a new object.**
 	* 最后说一句，就是Java是值传递，但是对于对象类型传递的值是一个引用。所以调用引用对象的方法是可以改变对象state的，但是没法改变引用的对象，因为传的是值，并不是引用。
+
 #### 4.6 Object construction
 * overloading: sevral methods have the same name but different parameters.
 * Constructor with no arguments: 
@@ -121,6 +126,7 @@ tags:
 	*	*finalize* method
 		* finalize() may be invoked on an object when it becomes garbage. Object's implementation of finalize() does nothing—you can override finalize() to do cleanup, such as freeing resources.
 		*	The finalize() method may be called automatically by the system, but when it is called, or even if it is called, is uncertain. Therefore, you should not rely on this method to do your cleanup for you. For example, if you don't close file descriptors in your code after performing I/O and you expect finalize() to close them for you, you may run out of file descriptors.
+
 #### 4.7 Packages
 *  reason: garantee the uniqueness of class names
 * **compiler locates classes in package**: bytecodes in class file classes are referred in full package
@@ -134,6 +140,7 @@ tags:
 * Package scope(范围)
 	* private public
 	* default: accessible in the same package
+
 #### 4.8 Class path
 * use .jar file
 	* set **class path**
@@ -166,9 +173,12 @@ tags:
 			*	在当前包中找Employee
 			*	*找到多个相同类报compile error*
 			*	*compiler比对源代码和class文件的版本。如class文件版本落后则更新*
+
 #### 4.9 comments
 		(maybe) see later
+
 #### 4.10 Class design hints
+
 >#### 学习记录
 >##### 05/07/2018
 >P134 - P182

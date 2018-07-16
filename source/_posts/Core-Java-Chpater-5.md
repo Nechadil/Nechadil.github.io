@@ -1,8 +1,8 @@
 ---
-title: Core Java (Chpater 5)
+title: Core java (Chpater 5)
 date: 2018-07-12 19:11:43
 tags:
-	- Core Java
+	- Core java
 ---
 ### Chapter 5 Inheritance
 #### 5.1 Class, Superclass, Subclass
@@ -27,13 +27,13 @@ tags:
 		比如：可以将父类对象赋值为子类对象的实例
 		即父类可以引用（refer to）任何其子类对象。
 	*	注意下面这个例子
-	```Java
-		super[] superArray；
-		superArray[0] = subObject;
-		//false
-		superArray[0].subMethod();
-		//true
-		subObject.subMethod();
+	```
+	super[] superArray；
+	superArray[0] = subObject;
+	//false
+	superArray[0].subMethod();
+	//true
+	subObject.subMethod();
 	```
 	从编译器的角度考虑。数组superArray中的元素是super类，不能使用子类方法。
 * Dynamic binding实现方式
@@ -52,39 +52,37 @@ tags:
 * 避免继承
 	* final 类：不能被继承
 	* final方法：不能被override
-	5. casting
+*  casting
 	子类转父类不需要casting
 	父类转子类则需要（因为内容增加了）
 	可能在运行时出现ClassCastException. 因此需要**instanceof**判断：
-	```Java
-		Superclass super;
-		if（super instanceof Subclass）
-			Subclass sub = (Subclass)super;
+	```
+	Superclass super;
+	if（super instanceof Subclass）
+		Subclass sub = (Subclass)super;
 	```
 	null instanceof Class 总是返回false（因为null不引用任何类）
 * abstract class
 当一个类需要作为其他类的基础而不需要使用它的实例的时候，使用抽象类。抽象类可以定义**具体方法**或者**抽象方法**。当没确定具体实现时使用抽象方法。
-	```Java
-	abstract class Person
-	{
-		private String name;
-		public Person(String n)
-		{
-			name = n;
-		}
-		public abstract String getDescription();
-		public String getName()
-		{
-			return name;
-		}
+```
+abstract class Person {
+	private String name;
+	public Person(String n) {
+		name = n;
 	}
-	```		
+	public abstract String getDescription();
+	public String getName() {
+		return name;
+	}
+}
+```
 	子类实现全部抽象方法/子类没实现全部抽象方法（**此时子类也必须为abstract**）
 * Protected access
 	private, public, default(package visible), protected(default + subclasses)
+
 #### 5.2 object
-	every class extends object
-	only primitive types are not objects
+* every class extends object
+only primitive types are not objects
 * equals()
 	* default: reference equals
 	* implementation:
@@ -101,18 +99,19 @@ tags:
 	* 注意equals方法参数类型是**Object**!!!否则方法不是重写Object类的equals方法而是新建了另一个。
 * hashCode()
 	* Object类hashCode()方法默认是根据对象在内存的地址
-	* From Java7: Objects,hashCode(object) 
+	* From java7: Objects,hashCode(object) 
 		explicit parameter 为null返回0，否则调用object的hashCode方法 
 	* 更简单的方法： Objects.hash(param1, param2, param3, ...)生成hashCode
 	* x,equals(y) ⇒ x.hashCode() == y.hashCode()
 	* **重写hashCode方法的原因**：在使用HashMap的时候，两个相同的key值应该返回相同的内容。如果不重写hashCode，Object类里的方法计算的是内存地址，一般不同。导致相同key值无法获得相同结果。
 	* Arrays.hashCode（）方法返回根据数组元素hashCode生成的hashCode
 * toString()
-	```Java
-		ClassA a = new ClassA();
-		//a.toString() is called
-		String str = "..." + a;
-	```
+```java
+ClassA a = new ClassA();
+//a.toString() is called
+String str = "..." + a;
+```
+
 #### 5.3 Generic Array Lists
 *	ArrayList<Employee> staff = new ArrayList<>();
 	* *<>*: diamond syntax
@@ -121,23 +120,26 @@ tags:
 	* array.set(i, element);   等价于 array[i] = element;
 		set只用来修改。添加用add
 	* array,get(i);
+
 #### 5.4 Wrapper and Autoboxing
 * Wrapper
 Interger & int
-* Autoboxing (from Java 5)
+* Autoboxing (from java 5)
 by the compiler
-```Java
+	```
 	//autoBoxing
 	list.add(3); ⇐ ⇒ list.add(Integer.valueOf(3));
 	//unbox
 	int n = list.get(i) ⇐ ⇒ int n = list.get(i).intVlaue();
-```	
+	```	
+
 #### 5.5 Methods with a variable number of parameters
 * signature:
 	public void method(ClassA... params)
 * params 类型为 ClassA[ ]
+
 #### 5.6 Enumeration Classes
-```Java
+	```java
 	public enum Size {
 		//每个类型只有一个实例
 		Size1(attr1), Size2(attr2)...;
@@ -154,13 +156,14 @@ by the compiler
 	Size.Size1.getAttr();
 	//返回Size.Size1, Size,Size2, ......
 	Size[] values = Size.values();
-```
+	```
+	
 #### 5.7  Reflaction
 *  *Class*类
 	* runtime type identification 
 		用来跟踪每个对象所属的类，JVM由此选出属于该对象的正确方法
 		JVM针对每种类型只有一个Class对象，所以可以直接比较内存地址
-	```Java
+	```java
 	String name = object.getClass().getName();
 	Class cl = Class.forName("java.util.Date");
 	//认证类的种类
@@ -171,13 +174,14 @@ by the compiler
 	e.getClass().newInstance();
 	Class.forName("java.util.Date").newInstance();
 	```
-	* 类加载顺序
+* 类加载顺序
 	包含main方法的class先启动，加载它需要的所有类。这些类加载它们依赖的类。
 	* Class c = object.class
 * 使用反射
 	* java,lang.reflect包：Field, Method, Constructor
 * Generic Array
 * Invoke
+
 #### Design hints for  Inheritance
 * 
 	

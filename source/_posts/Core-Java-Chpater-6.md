@@ -12,6 +12,7 @@ tags:
 	all fields are *public static final*
 	不要写访问符
 * 一个interface变量要指向一个具体的实例
+
 #### 6.2 Cloning
 * protected Object.clone( )
 	* mutable 类型克隆的结果还是指向同一对象的引用，所以需要重写。
@@ -19,8 +20,10 @@ tags:
 * 使用Cloneable接口进行deep clone
 	* 实现clone方法，访问权限为public。
 	* 方法内对调用自身属性的clone方法
+
 #### 6.3 Interfaces and Callbacks
 * 这种callback原理就是在功能类中参数是接口而不是具体实现。在实际使用时传入一个该接口的实现类。这样降低了类之间的耦合。
+
 #### 6.4 Inner Classes
 * 为什么要用内部类？
 	* 可以直接使用外部类private域
@@ -72,6 +75,7 @@ tags:
 	* 用于不需要访问外界对象的内部类。
 	* 只为外部类服务（比如一个类中一个返回最大值最小值的方法，新建一个静态内部类Pair，储存最大最小值，只用于这个类，没必要在包内新建一个类）
 	* 接口内的内部类都是自动public static的
+
 #### 6.5  Dynamic Proxy
 书里讲的完全看不懂。。。但是在网上找到了[这篇文章](http://www.cnblogs.com/xdp-gacl/p/3971367.html)，教你如何找刘德华唱歌跳舞。写得很好。
 * 总的来说分三个部分。一个是接口，比如“会表演”。一个实现类，比如“演员”。一个代理类，比如“经纪人”

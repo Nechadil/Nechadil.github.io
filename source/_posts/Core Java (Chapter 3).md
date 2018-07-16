@@ -13,23 +13,27 @@ tags:
 * 浮点（float，double）：单双精度。使用BigDecimal类进行精确计算。
 * 字符(char)：2bytes
 今天下午正好也在研究字符的东西。Java里的char是表示UTF-16 encoding下的code units。比如: System.out.println("\uD835\uDD6B")的结果是zz。注意一个code point是指在Unicode的code page中字符与代码的映射。在不同的caracter encoding下（UTF-8，UTF-16）一个code point对应不同数量的code unit。
+
 #### 2. 变量
 * final 不可变量
 使用static final在类中声明供所有内部方法使用。
+
 #### 3. 类型转换
 原则是不丢失信息。比如byte => short => int =>long  
+
 #### 4. enumerated type
 ```Java
 enum Size { SMALL, MEDIUM, LARGE, EXTRA_LARGE }
 Size s = Size.MEDIUM;
 ```
+
 #### 5. 字符串
 * substring 
 ```Java
 String greeting = "Hello";
 String s = greeting.substring(0, 3);//'Hel'(0~2)
 ```
-这种方式优点是两个参数相减长度即为字符串长
+	这种方式优点是两个参数相减长度即为字符串长
 * immutable
 关于动机几乎类似月经贴了，总是记不住。
 首先字符串的改变本质是引用对象的改变。改变后之前字符串的**值**是不可变的。
@@ -57,7 +61,7 @@ A char value is a surrogate code unit if and only if it is either a low-surrogat
 if (Character.isSurrogate(sentence.charAt(i))) i--;
 int cp = sentence.codePointAt(i);
 ```
-注意两种遍历一种是以code point为单位，一种是以code unit为单位。
+	注意两种遍历一种是以code point为单位，一种是以code unit为单位。
 * 字符串的连接
 （原来从开头就出现了面试基础知识。看来不是面试题难，而是书看的确实不够。真的都是最基础的点了。）
 ```Java
@@ -67,7 +71,7 @@ builder.append(ch); // appends a single character
 builder.append(str); // appends a string
 String completedString = builder.toString()；
 ```
-这里还有一个月经问题就是StringBuffer和StringBuilder的区别。StringBuffer是线程安全的，实现原理是在某些方法上加了synchronize关键字。但是StringBuffer好像没什么人用了，因为线程安全对于字符串而言好像没什么意义。
+	这里还有一个月经问题就是StringBuffer和StringBuilder的区别。StringBuffer是线程安全的，实现原理是在某些方法上加了synchronize关键字。但是StringBuffer好像没什么人用了，因为线程安全对于字符串而言好像没什么意义。
 
 #### 6. 输入输出
 * 输入
