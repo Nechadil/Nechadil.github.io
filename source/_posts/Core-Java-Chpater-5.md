@@ -63,7 +63,7 @@ tags:
 	```
 	null instanceof Class 总是返回false（因为null不引用任何类）
 * abstract class
-	当一个类需要作为其他类的基础而不需要使用它的实例的时候，使用抽象类。抽象类可以定义**具体方法**或者**抽象方法**。当没确定具体实现时使用抽象方法。
+当一个类需要作为其他类的基础而不需要使用它的实例的时候，使用抽象类。抽象类可以定义**具体方法**或者**抽象方法**。当没确定具体实现时使用抽象方法。
 	```Java
 		abstract class Person
 		{
@@ -79,9 +79,9 @@ tags:
 			}
 		}
 	```		
-	子类实现全部抽象方法/子类没实现全部抽象方法（**此时子类也必须为abstract**）
+子类实现全部抽象方法/子类没实现全部抽象方法（**此时子类也必须为abstract**）
 * Protected access
-	private, public, default(package visible), protected(default + subclasses)
+private, public, default(package visible), protected(default + subclasses)
 #### 5.2 object
 every class extends object
 only primitive types are not objects
@@ -123,15 +123,15 @@ only primitive types are not objects
 	* array,get(i);
 #### 5.4 Wrapper and Autoboxing
 * Wrapper
-	Interger & int
+Interger & int
 * Autoboxing (from Java 5)
-	by the compiler
-	```Java
-		//autoBoxing
-		list.add(3); ⇐ ⇒ list.add(Integer.valueOf(3));
-		//unbox
-		int n = list.get(i) ⇐ ⇒ int n = list.get(i).intVlaue();
-	```	
+by the compiler
+```Java
+	//autoBoxing
+	list.add(3); ⇐ ⇒ list.add(Integer.valueOf(3));
+	//unbox
+	int n = list.get(i) ⇐ ⇒ int n = list.get(i).intVlaue();
+```	
 #### 5.5 Methods with a variable number of parameters
 * signature:
 	public void method(ClassA... params)

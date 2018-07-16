@@ -22,7 +22,7 @@ tags:
 	* Inheritance (is - a)
 #### 4.2 Using predefined classes
 * Object variable **refers** to an object (not _contains_)
-*  Date: a point in time
+* Date: a point in time
 	GregorianCalendar: dates in the gregorian calendar notation
 * mutator methods: change instance fields (setter, ...)
 	accessor methods: only accesss instance fields (getter)
