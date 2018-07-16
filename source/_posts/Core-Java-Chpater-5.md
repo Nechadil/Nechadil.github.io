@@ -2,7 +2,7 @@
 title: Core java (Chpater 5)
 date: 2018-07-12 19:11:43
 tags:
-	- Core java
+	- Core Java
 ---
 ### Chapter 5 Inheritance
 #### 5.1 Class, Superclass, Subclass
