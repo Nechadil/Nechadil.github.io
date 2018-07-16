@@ -65,26 +65,26 @@ tags:
 * abstract class
 当一个类需要作为其他类的基础而不需要使用它的实例的时候，使用抽象类。抽象类可以定义**具体方法**或者**抽象方法**。当没确定具体实现时使用抽象方法。
 	```Java
-		abstract class Person
+	abstract class Person
+	{
+		private String name;
+		public Person(String n)
 		{
-			private String name;
-			public Person(String n)
-			{
-				name = n;
-			}
-			public abstract String getDescription();
-			public String getName()
-			{
-				return name;
-			}
+			name = n;
 		}
+		public abstract String getDescription();
+		public String getName()
+		{
+			return name;
+		}
+	}
 	```		
-子类实现全部抽象方法/子类没实现全部抽象方法（**此时子类也必须为abstract**）
+	子类实现全部抽象方法/子类没实现全部抽象方法（**此时子类也必须为abstract**）
 * Protected access
-private, public, default(package visible), protected(default + subclasses)
+	private, public, default(package visible), protected(default + subclasses)
 #### 5.2 object
-every class extends object
-only primitive types are not objects
+	every class extends object
+	only primitive types are not objects
 * equals()
 	* default: reference equals
 	* implementation:
