@@ -1,7 +1,8 @@
 ---
-title: Core Java Chapter 4
+title: Core Java (Chapter 4)
 date: 2018-07-06 18:17:37
 tags:
+	- Core Java
 ---
 ### Chapter 4 Objects and Classes
 #### 4.1 Intro
