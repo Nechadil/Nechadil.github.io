@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nechadil.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="很惭愧地上网下了一个英文版pdf。想想两三年前就买了这本书的中文版，就又有些许的心安理得。重新看一遍吧。之前看了好几回都没能通过第四章的样子。如今两年过去做了些项目，应该会容易些。争取在年末前先过一遍。前两章略过了，直接从基础概念看起。 Chapter 31. 基本类型 整形（byte，short，int，long）：存储空间，范围 浮点（float，double）：单双精度。使用BigDecim">
+<meta name="keywords" content="Core Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core Java (Chapter 3)">
+<meta property="og:url" content="https://nechadil.github.io/2018/07/05/Core Java (Chapter 3)/index.html">
+<meta property="og:site_name" content="Nechadil">
+<meta property="og:description" content="很惭愧地上网下了一个英文版pdf。想想两三年前就买了这本书的中文版，就又有些许的心安理得。重新看一遍吧。之前看了好几回都没能通过第四章的样子。如今两年过去做了些项目，应该会容易些。争取在年末前先过一遍。前两章略过了，直接从基础概念看起。 Chapter 31. 基本类型 整形（byte，short，int，long）：存储空间，范围 浮点（float，double）：单双精度。使用BigDecim">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-23T21:10:27.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Core Java (Chapter 3)">
+<meta name="twitter:description" content="很惭愧地上网下了一个英文版pdf。想想两三年前就买了这本书的中文版，就又有些许的心安理得。重新看一遍吧。之前看了好几回都没能通过第四章的样子。如今两年过去做了些项目，应该会容易些。争取在年末前先过一遍。前两章略过了，直接从基础概念看起。 Chapter 31. 基本类型 整形（byte，short，int，long）：存储空间，范围 浮点（float，double）：单双精度。使用BigDecim">
+
+<link rel="canonical" href="https://nechadil.github.io/2018/07/05/Core Java (Chapter 3)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Core Java (Chapter 3) | Nechadil</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nechadil</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nechadil.github.io/2018/07/05/Core Java (Chapter 3)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nechadil">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nechadil">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Core Java (Chapter 3)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-05 19:37:40" itemprop="dateCreated datePublished" datetime="2018-07-05T19:37:40+02:00">2018-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 22:10:27" itemprop="dateModified" datetime="2020-03-23T22:10:27+01:00">2020-03-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>很惭愧地上网下了一个英文版pdf。想想两三年前就买了这本书的中文版，就又有些许的心安理得。重新看一遍吧。之前看了好几回都没能通过第四章的样子。如今两年过去做了些项目，应该会容易些。争取在年末前先过一遍。<br>前两章略过了，直接从基础概念看起。</p>
+<h3 id="Chapter-3"><a href="#Chapter-3" class="headerlink" title="Chapter 3"></a>Chapter 3</h3><h4 id="1-基本类型"><a href="#1-基本类型" class="headerlink" title="1. 基本类型"></a>1. 基本类型</h4><ul>
+<li>整形（byte，short，int，long）：存储空间，范围</li>
+<li>浮点（float，double）：单双精度。使用BigDecimal类进行精确计算。</li>
+<li>字符(char)：2bytes<br>今天下午正好也在研究字符的东西。Java里的char是表示UTF-16 encoding下的code units。比如: System.out.println(“\uD835\uDD6B”)的结果是zz。注意一个code point是指在Unicode的code page中字符与代码的映射。在不同的caracter encoding下（UTF-8，UTF-16）一个code point对应不同数量的code unit。</li>
+</ul>
+<h4 id="2-变量"><a href="#2-变量" class="headerlink" title="2. 变量"></a>2. 变量</h4><ul>
+<li>final 不可变量<br>使用static final在类中声明供所有内部方法使用。</li>
+</ul>
+<h4 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3. 类型转换"></a>3. 类型转换</h4><p>原则是不丢失信息。比如byte =&gt; short =&gt; int =&gt;long  </p>
+<h4 id="4-enumerated-type"><a href="#4-enumerated-type" class="headerlink" title="4. enumerated type"></a>4. enumerated type</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Size &#123; SMALL, MEDIUM, LARGE, EXTRA_LARGE &#125;</span><br><span class="line">Size s = Size.MEDIUM;</span><br></pre></td></tr></table></figure>
+<h4 id="5-字符串"><a href="#5-字符串" class="headerlink" title="5. 字符串"></a>5. 字符串</h4><ul>
+<li><p>substring </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String greeting = <span class="string">"Hello"</span>;</span><br><span class="line">String s = greeting.substring(<span class="number">0</span>, <span class="number">3</span>);<span class="comment">//'Hel'(0~2)</span></span><br></pre></td></tr></table></figure>
+<p>  这种方式优点是两个参数相减长度即为字符串长</p>
+</li>
+<li>immutable<br>关于动机几乎类似月经贴了，总是记不住。<br>首先字符串的改变本质是引用对象的改变。改变后之前字符串的<strong>值</strong>是不可变的。<br>为什么这样做？一方面这种方式不能直接修改字符，降低了效率。另一方面使字符串保存在常量池里，可以被共享，提高了效率。</li>
+<li><p>Code point &amp; Code unit</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">"𝕫"</span>.charAt(<span class="number">1</span>)；<span class="comment">//返回的是这个Unicode code point在UTF-16下的第二个code unit值</span></span><br></pre></td></tr></table></figure>
+<p>所以使用char是很危险的，因为supplementary characters是用一对儿code unit来表示而不是一个。而一个char表示一个code unit。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前序遍历字符串</span></span><br><span class="line"><span class="keyword">int</span> cp = sentence.codePointAt(i);</span><br><span class="line"><span class="comment">//Characters whose code points are greater than U+FFFF are called supplementary characters.</span></span><br><span class="line"><span class="keyword">if</span> (Character.isSupplementaryCodePoint(cp)) i += <span class="number">2</span>;</span><br><span class="line"><span class="keyword">else</span> i++;</span><br><span class="line"></span><br><span class="line"><span class="comment">//后序遍历字符串</span></span><br><span class="line">i--;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Determines if the given `char` value is a Unicode surrogate code unit.</span></span><br><span class="line"><span class="comment">Such values do not represent characters by themselves, but are used in the representation of [supplementary characters](https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html#supplementary) in the UTF-16 encoding.</span></span><br><span class="line"><span class="comment">A char value is a surrogate code unit if and only if it is either a low-surrogate code unit or a high-surrogate code unit.</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">if</span> (Character.isSurrogate(sentence.charAt(i))) i--;</span><br><span class="line"><span class="keyword">int</span> cp = sentence.codePointAt(i);</span><br></pre></td></tr></table></figure>
+<p>  注意两种遍历一种是以code point为单位，一种是以code unit为单位。</p>
+</li>
+<li><p>字符串的连接<br>（原来从开头就出现了面试基础知识。看来不是面试题难，而是书看的确实不够。真的都是最基础的点了。）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//好处是避免了多个String对象的创建</span></span><br><span class="line">StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">builder.append(ch); <span class="comment">// appends a single character</span></span><br><span class="line">builder.append(str); <span class="comment">// appends a string</span></span><br><span class="line">String completedString = builder.toString()；</span><br></pre></td></tr></table></figure>
+<p>  这里还有一个月经问题就是StringBuffer和StringBuilder的区别。StringBuffer是线程安全的，实现原理是在某些方法上加了synchronize关键字。但是StringBuffer好像没什么人用了，因为线程安全对于字符串而言好像没什么意义。</p>
+</li>
+</ul>
+<h4 id="6-输入输出"><a href="#6-输入输出" class="headerlink" title="6. 输入输出"></a>6. 输入输出</h4><ul>
+<li>输入<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//console</span></span><br><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String aLine = in.nextLine();</span><br><span class="line">String aWord = in.next();</span><br><span class="line"><span class="keyword">int</span> aInt = in.nextInt();</span><br><span class="line"><span class="comment">//fileIO</span></span><br><span class="line">Scanner fileInput = <span class="function">nez <span class="title">Scanner</span><span class="params">(Path.get(<span class="string">"x.txt"</span>)</span>)</span>;</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="string">"output.txt"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="7-control-flow"><a href="#7-control-flow" class="headerlink" title="7. control flow"></a>7. control flow</h4><ul>
+<li>do while</li>
+<li><p>switch</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(<span class="keyword">var</span>) &#123;</span><br><span class="line">		<span class="keyword">case</span> var1:</span><br><span class="line">			...</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> var2:</span><br><span class="line">			...</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  注意没有break则会继续进行判断。作者评价如下：</p>
+<blockquote>
+<p>This behavior is<br>plainly dangerous and a common cause for errors. For that reason, we never use the switch<br>statement in our programs.</p>
+</blockquote>
+</li>
+<li><p>break control flow</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// break out of loop</span></span><br><span class="line"><span class="keyword">while</span>(tset)&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// break out of multiple nested loop</span></span><br><span class="line"><span class="comment">// label + colon</span></span><br><span class="line">break_label:</span><br><span class="line"><span class="keyword">while</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>()&#123;</span><br><span class="line">		<span class="keyword">if</span>()&#123;</span><br><span class="line">			<span class="comment">// out of all the loops</span></span><br><span class="line">			<span class="keyword">break</span> break_label;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//jumps here</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array</p>
+<ul>
+<li><p>copy array</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arrayA = arrayB;</span><br><span class="line"><span class="comment">//modified  also the arrayB</span></span><br><span class="line">arrayA[<span class="number">3</span>] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>注意Java是传递引用。所以如果想新建数组使用Arrays.copyOf(arrayB, arrayB.length)方法。</p>
+</li>
+<li>扩容<pre><code class="Java">Arrays.copyOf(arrayB, arrayB.length*<span class="number">2</span>);
+</code></pre>
+</li>
+<li>彩票抽奖<br>程序就不贴了。这里边的问题是如何从一个数组中取出几个不重复的随机数。要点是每次随机的数不是值而是index。这样当这个index里的值被保存后把最后一个值传到index里，同时把取值范围减一。这样最后一位就不会被计入下次抽取中，同时把上一个抽取到的值从数组中抹去。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h3><h4 id="2018-06-28（P59-P90）"><a href="#2018-06-28（P59-P90）" class="headerlink" title="2018/06/28（P59~P90）"></a>2018/06/28（P59~P90）</h4><p>真的是常看常新。三年前快冬天的时候我还记得看这一章觉得很简单，其实里边内容很多。要见识的多了再回头看才能有更多收获。</p>
+<h4 id="2018-07-02-P91-P112"><a href="#2018-07-02-P91-P112" class="headerlink" title="2018/07/02 (P91-P112)"></a>2018/07/02 (P91-P112)</h4><p>进度差了一些。</p>
+<h4 id="2018-07-03-P113-P134"><a href="#2018-07-03-P113-P134" class="headerlink" title="2018/07/03(P113-P134)"></a>2018/07/03(P113-P134)</h4><p>这个是4号记的笔记了。总体来说进度感觉有点慢。尝试要不要简略地过一遍然后把一个脉络记下来。但是总算完成了一章的学习。继续努力。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Core-Java/" rel="tag"># Core Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/28/第一阶段的学习/" rel="prev" title="第一阶段的学习">
+      <i class="fa fa-chevron-left"></i> 第一阶段的学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/06/Core Java (Chapter 4)/" rel="next" title="Core Java (Chapter 4)">
+      Core Java (Chapter 4) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本类型"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基本类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-变量"><span class="nav-number">1.2.</span> <span class="nav-text">2. 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-类型转换"><span class="nav-number">1.3.</span> <span class="nav-text">3. 类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-enumerated-type"><span class="nav-number">1.4.</span> <span class="nav-text">4. enumerated type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-字符串"><span class="nav-number">1.5.</span> <span class="nav-text">5. 字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-输入输出"><span class="nav-number">1.6.</span> <span class="nav-text">6. 输入输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-control-flow"><span class="nav-number">1.7.</span> <span class="nav-text">7. control flow</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习记录"><span class="nav-number">2.</span> <span class="nav-text">学习记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2018-06-28（P59-P90）"><span class="nav-number">2.1.</span> <span class="nav-text">2018/06/28（P59~P90）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2018-07-02-P91-P112"><span class="nav-number">2.2.</span> <span class="nav-text">2018/07/02 (P91-P112)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2018-07-03-P113-P134"><span class="nav-number">2.3.</span> <span class="nav-text">2018/07/03(P113-P134)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Nechadil</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nechadil</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

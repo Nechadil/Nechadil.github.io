@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nechadil.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Chapter 5 Inheritance5.1 Class, Superclass, Subclass override 子类重写方法的时候对于父类私有域需要用super.getter()获取 super不是引用，而是一个引导compiler调用父类方法的关键字   constructor 因为子类没有访问父类属性的权限，所以必须通过父类的构造器，即super()或super(args) sup">
+<meta name="keywords" content="Core Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core java (Chpater 5)">
+<meta property="og:url" content="https://nechadil.github.io/2018/07/12/Core-Java-Chpater-5/index.html">
+<meta property="og:site_name" content="Nechadil">
+<meta property="og:description" content="Chapter 5 Inheritance5.1 Class, Superclass, Subclass override 子类重写方法的时候对于父类私有域需要用super.getter()获取 super不是引用，而是一个引导compiler调用父类方法的关键字   constructor 因为子类没有访问父类属性的权限，所以必须通过父类的构造器，即super()或super(args) sup">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-23T21:10:27.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Core java (Chpater 5)">
+<meta name="twitter:description" content="Chapter 5 Inheritance5.1 Class, Superclass, Subclass override 子类重写方法的时候对于父类私有域需要用super.getter()获取 super不是引用，而是一个引导compiler调用父类方法的关键字   constructor 因为子类没有访问父类属性的权限，所以必须通过父类的构造器，即super()或super(args) sup">
+
+<link rel="canonical" href="https://nechadil.github.io/2018/07/12/Core-Java-Chpater-5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Core java (Chpater 5) | Nechadil</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nechadil</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nechadil.github.io/2018/07/12/Core-Java-Chpater-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nechadil">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nechadil">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Core java (Chpater 5)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-12 19:11:43" itemprop="dateCreated datePublished" datetime="2018-07-12T19:11:43+02:00">2018-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 22:10:27" itemprop="dateModified" datetime="2020-03-23T22:10:27+01:00">2020-03-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Chapter-5-Inheritance"><a href="#Chapter-5-Inheritance" class="headerlink" title="Chapter 5 Inheritance"></a>Chapter 5 Inheritance</h3><h4 id="5-1-Class-Superclass-Subclass"><a href="#5-1-Class-Superclass-Subclass" class="headerlink" title="5.1 Class, Superclass, Subclass"></a>5.1 Class, Superclass, Subclass</h4><ul>
+<li>override<ul>
+<li>子类重写方法的时候对于父类私有域需要用<em>super.getter()</em>获取</li>
+<li>super不是引用，而是一个引导compiler调用父类方法的关键字</li>
+</ul>
+</li>
+<li>constructor<ul>
+<li>因为子类没有访问父类属性的权限，所以必须通过父类的构造器，即super()或super(args)</li>
+<li>super构造器必须是构造器的第一行（只有把父类的东西初始化了才能再初始化子类的多余部分）</li>
+<li>关于super 和 this 的比较<br>Recall that the this keyword has two meanings: to denote a reference to the implicit parameter and to call another constructor of the same class. Likewise, the super keyword has two meanings: to invoke a superclass method and to invoke a superclass constructor. When used to invoke constructors, the this and super keywords are closely related. <strong>The constructor calls can only occur as the first statement in another constructor.</strong> The constructor parameters are either passed to another constructor of the same class (this) or a constructor of the superclass (super).<br>两者的作用都是1. 调用方法 2. 调用构造器</li>
+</ul>
+</li>
+<li>polymorphism &amp; dynamic binding<br>  敲黑板了。这个第一次法国实习前公司的面试里一道我没答上的愚蠢题目。我当时还问这个词英文是什么。转眼间不到一个月实习就要结束了。<br>  <em>polymorphism: the fact that a variable can refer to multiple actual type</em><br>  <em>dynamic binding: automatically selecting the appropriate method at run time</em></li>
+<li>Inheritance hierarchies</li>
+<li>Inheritance hierarchies: 多个类继承同一个类</li>
+<li>inheritance chain：在hierarchies中从某个类到其祖先类的路径</li>
+<li><p>liskov substitution principle 里氏替换原则</p>
+<ul>
+<li>当需要使用父类对象的时候都可以使用子类对象<br>  比如：可以将父类对象赋值为子类对象的实例<br>  即父类可以引用（refer to）任何其子类对象。</li>
+<li><p>注意下面这个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">super[] superArray；</span><br><span class="line">superArray[0] = subObject;</span><br><span class="line">//false</span><br><span class="line">superArray[0].subMethod();</span><br><span class="line">//true</span><br><span class="line">subObject.subMethod();</span><br></pre></td></tr></table></figure>
+<p>从编译器的角度考虑。数组superArray中的元素是super类，不能使用子类方法。</p>
+</li>
+</ul>
+</li>
+<li>Dynamic binding实现方式<ol>
+<li>假设调用c.f(param)，编译器寻找所有c类和c的父类中符合条件的方法：<ul>
+<li>可访问</li>
+<li>方法名为f</li>
+</ul>
+</li>
+<li>overloading  resolution<br>匹配参数类型（检验签名）。如果只有一个，则调用该方法</li>
+<li>static binding<br>private, static, final方法编译器直接绑定（因为这三种不存在同签名方法或是与类的继承无关），不需要区分，此为静态绑定。<br>否则，调用方法由explicit parameter（即输入的参数param）的实际类型决定，在runtime时动态绑定。</li>
+<li>JVM根据c的类型决定。c的类中没有则找c的父类。<br>JVM存在method table存放所有签名。每次调用类JVM去查看签名。</li>
+</ol>
+</li>
+<li>多态好处<br>  extensible：superClass.method() 。当新加入一个superClass的子类并将superClass赋值为一个子类对象的时候，由于使用多态而不需要更改之前的代码</li>
+<li>避免继承<ul>
+<li>final 类：不能被继承</li>
+<li>final方法：不能被override</li>
+</ul>
+</li>
+<li><p>casting<br> 子类转父类不需要casting<br> 父类转子类则需要（因为内容增加了）<br> 可能在运行时出现ClassCastException. 因此需要<strong>instanceof</strong>判断：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Superclass super;</span><br><span class="line">if（super instanceof Subclass）</span><br><span class="line">	Subclass sub = (Subclass)super;</span><br></pre></td></tr></table></figure>
+<p> null instanceof Class 总是返回false（因为null不引用任何类）</p>
+</li>
+<li><p>abstract class<br>当一个类需要作为其他类的基础而不需要使用它的实例的时候，使用抽象类。抽象类可以定义<strong>具体方法</strong>或者<strong>抽象方法</strong>。当没确定具体实现时使用抽象方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">abstract class Person &#123;</span><br><span class="line">	private String name;</span><br><span class="line">	public Person(String n) &#123;</span><br><span class="line">		name = n;</span><br><span class="line">	&#125;</span><br><span class="line">	public abstract String getDescription();</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  子类实现全部抽象方法/子类没实现全部抽象方法（<strong>此时子类也必须为abstract</strong>）</p>
+</li>
+<li>Protected access<br>  private, public, default(package visible), protected(default + subclasses)</li>
+</ul>
+<h4 id="5-2-object"><a href="#5-2-object" class="headerlink" title="5.2 object"></a>5.2 object</h4><ul>
+<li>every class extends object<br>only primitive types are not objects</li>
+<li>equals()<ul>
+<li>default: reference equals</li>
+<li>implementation:<ol start="0">
+<li><em>If implement equals() for subclass, test super.equals(other) first</em></li>
+<li>this == otherObject ⇒ true</li>
+<li>otherObject == null ⇒ false</li>
+<li>getClass != otherObject.getClass() ⇒ false</li>
+<li>class cast:  Class other = (Class) otherObject;</li>
+<li>return a.attribute1 == other.attribute1 &amp;&amp; ……</li>
+</ol>
+</li>
+<li>Object.equals(attribute, other.attribute) for non-primitive classes (in case attribute == null)</li>
+</ul>
+</li>
+<li>Equality testing and Inheritance<br>  不要使用instanceof 来代替3的步骤。问题出在有subclass的时候。instanceof会通过子类（但getClass不会）。<ul>
+<li>Arrays.equals(a，b) 测试数组元素是否相同</li>
+<li>注意equals方法参数类型是<strong>Object</strong>!!!否则方法不是重写Object类的equals方法而是新建了另一个。</li>
+</ul>
+</li>
+<li>hashCode()<ul>
+<li>Object类hashCode()方法默认是根据对象在内存的地址</li>
+<li>From java7: Objects,hashCode(object)<br>  explicit parameter 为null返回0，否则调用object的hashCode方法 </li>
+<li>更简单的方法： Objects.hash(param1, param2, param3, …)生成hashCode</li>
+<li>x,equals(y) ⇒ x.hashCode() == y.hashCode()</li>
+<li><strong>重写hashCode方法的原因</strong>：在使用HashMap的时候，两个相同的key值应该返回相同的内容。如果不重写hashCode，Object类里的方法计算的是内存地址，一般不同。导致相同key值无法获得相同结果。</li>
+<li>Arrays.hashCode（）方法返回根据数组元素hashCode生成的hashCode</li>
+</ul>
+</li>
+<li>toString()<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ClassA a = <span class="keyword">new</span> ClassA();</span><br><span class="line"><span class="comment">//a.toString() is called</span></span><br><span class="line">String str = <span class="string">"..."</span> + a;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="5-3-Generic-Array-Lists"><a href="#5-3-Generic-Array-Lists" class="headerlink" title="5.3 Generic Array Lists"></a>5.3 Generic Array Lists</h4><ul>
+<li>ArrayList<employee> staff = new ArrayList&lt;&gt;();<ul>
+<li><em>&lt;&gt;</em>: diamond syntax</li>
+<li>ensureCapacity(100): 在达到100前不扩容（提高了效率）</li>
+</ul>
+</employee></li>
+<li>Accessing elements<ul>
+<li>array.set(i, element);   等价于 array[i] = element;<br>  set只用来修改。添加用add</li>
+<li>array,get(i);</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-4-Wrapper-and-Autoboxing"><a href="#5-4-Wrapper-and-Autoboxing" class="headerlink" title="5.4 Wrapper and Autoboxing"></a>5.4 Wrapper and Autoboxing</h4><ul>
+<li>Wrapper<br>Interger &amp; int</li>
+<li>Autoboxing (from java 5)<br>by the compiler  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">	//autoBoxing</span><br><span class="line">	list.add(3); ⇐ ⇒ list.add(Integer.valueOf(3));</span><br><span class="line">	//unbox</span><br><span class="line">	int n = list.get(i) ⇐ ⇒ int n = list.get(i).intVlaue();</span><br><span class="line">	```	</span><br><span class="line"></span><br><span class="line">#### 5.5 Methods with a variable number of parameters</span><br><span class="line">* signature:</span><br><span class="line">	public void method(ClassA... params)</span><br><span class="line">* params 类型为 ClassA[ ]</span><br><span class="line"></span><br><span class="line">#### 5.6 Enumeration Classes</span><br><span class="line">	```java</span><br><span class="line">	public enum Size &#123;</span><br><span class="line">		//每个类型只有一个实例</span><br><span class="line">		Size1(attr1), Size2(attr2)...;</span><br><span class="line">		//实例的值，为私有属性</span><br><span class="line">		private AttrClass attr;</span><br><span class="line">		//实例化方法（私有方法，用于初始化）</span><br><span class="line">		private Size(AttrClass attr) &#123;this.attr = attr:&#125;</span><br><span class="line">		//公有getter</span><br><span class="line">		public AttrClass getAttr()&#123;</span><br><span class="line">				return attr;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	// 获取属性值方法</span><br><span class="line">	Size.Size1.getAttr();</span><br><span class="line">	//返回Size.Size1, Size,Size2, ......</span><br><span class="line">	Size[] values = Size.values();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="5-7-Reflaction"><a href="#5-7-Reflaction" class="headerlink" title="5.7  Reflaction"></a>5.7  Reflaction</h4><ul>
+<li><p><em>Class</em>类</p>
+<ul>
+<li>runtime type identification<br>  用来跟踪每个对象所属的类，JVM由此选出属于该对象的正确方法<br>  JVM针对每种类型只有一个Class对象，所以可以直接比较内存地址<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String name = object.getClass().getName();</span><br><span class="line">Class cl = Class.forName(<span class="string">"java.util.Date"</span>);</span><br><span class="line"><span class="comment">//认证类的种类</span></span><br><span class="line"><span class="keyword">if</span>(e.getClass() == AClass<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用无参构造函数创建新实例,如无此函数则抛出异常</span></span><br><span class="line">e.getClass().newInstance();</span><br><span class="line">Class.forName(<span class="string">"java.util.Date"</span>).newInstance();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>类加载顺序<br>  包含main方法的class先启动，加载它需要的所有类。这些类加载它们依赖的类。</p>
+<ul>
+<li>Class c = object.class</li>
+</ul>
+</li>
+<li>使用反射<ul>
+<li>java,lang.reflect包：Field, Method, Constructor</li>
+</ul>
+</li>
+<li>Generic Array</li>
+<li>Invoke</li>
+</ul>
+<h4 id="Design-hints-for-Inheritance"><a href="#Design-hints-for-Inheritance" class="headerlink" title="Design hints for  Inheritance"></a>Design hints for  Inheritance</h4><ul>
+<li></li>
+</ul>
+<blockquote>
+<p>学习笔记<br>07/07/2018 （ P200 ~ P211）<br>周六一天只看了11页。。。至少早起了。而且在非工作日学习了。需要继续努力。好的开始。<br>08/07/2018 （ P211 ~ P221）<br>洲际赛LPL险胜，看得惊心动魄。继续努力才能安心看S8全球总决赛。你看看人家职业选手，doinb，mouse这种的，都是下放到各层联赛摸爬滚打好几个赛季才有所成，职业精神值得学习。<br>09/07/2018 (P222 - P249 )<br>11号记录。昨天晚上睡了会儿觉看了场世界杯。白天搞加密的学习也没看书。今天忽然理解坚持确实比数量要重要的多。每天10页三个月内就能搞定，20页更是一个月就完事儿了。但是如果不坚持下来很可能到最后连一本书都完成不了。不要贪快，学习乐在其中才是最重要的。每天10页书保底，一定要坚持下来。<br>12/07/2018 (P250 ~ P271)<br>用上班时间把这章最后一部分看完了。反射的部分后面有些东西就没记了。了解了一下能做什么，等到有需要的时候再回过头来学习吧。到目前为止记笔记的方式始终是边看边记。在考虑要不要做得更精致点。从下一章开始先浏览一定量的内容（比如一个小节），然后回过头来再整理。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Core-Java/" rel="tag"># Core Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/06/Core Java (Chapter 4)/" rel="prev" title="Core Java (Chapter 4)">
+      <i class="fa fa-chevron-left"></i> Core Java (Chapter 4)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/13/Core-Java-Chpater-6/" rel="next" title="Core Java (Chpater 6)">
+      Core Java (Chpater 6) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-5-Inheritance"><span class="nav-number">1.</span> <span class="nav-text">Chapter 5 Inheritance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-Class-Superclass-Subclass"><span class="nav-number">1.1.</span> <span class="nav-text">5.1 Class, Superclass, Subclass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-object"><span class="nav-number">1.2.</span> <span class="nav-text">5.2 object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-Generic-Array-Lists"><span class="nav-number">1.3.</span> <span class="nav-text">5.3 Generic Array Lists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-Wrapper-and-Autoboxing"><span class="nav-number">1.4.</span> <span class="nav-text">5.4 Wrapper and Autoboxing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-Reflaction"><span class="nav-number">1.5.</span> <span class="nav-text">5.7  Reflaction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Design-hints-for-Inheritance"><span class="nav-number">1.6.</span> <span class="nav-text">Design hints for  Inheritance</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Nechadil</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nechadil</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

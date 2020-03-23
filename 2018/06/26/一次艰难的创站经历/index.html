@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nechadil.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="终于把主题安装好了。整个建站过程耗时两晚，然而真正有价值的时间大概只有不到一个小时。本来的目的是开始记录自己学习编程的过程，结果创建博客就折腾了这么久，有点哭笑不得。 讲道理来说如今科技进步这么快理应出现各种傻瓜包，一个按键就解决所有问题。看来这种建站工具还是没能强大到这一点。从另一方面说明我对前端的构建工具一点也不熟悉。想想如果是导入个jar包或者import一个项目的话，即便没用过也不至于花这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次艰难的创站经历">
+<meta property="og:url" content="https://nechadil.github.io/2018/06/26/一次艰难的创站经历/index.html">
+<meta property="og:site_name" content="Nechadil">
+<meta property="og:description" content="终于把主题安装好了。整个建站过程耗时两晚，然而真正有价值的时间大概只有不到一个小时。本来的目的是开始记录自己学习编程的过程，结果创建博客就折腾了这么久，有点哭笑不得。 讲道理来说如今科技进步这么快理应出现各种傻瓜包，一个按键就解决所有问题。看来这种建站工具还是没能强大到这一点。从另一方面说明我对前端的构建工具一点也不熟悉。想想如果是导入个jar包或者import一个项目的话，即便没用过也不至于花这">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-23T21:10:27.437Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一次艰难的创站经历">
+<meta name="twitter:description" content="终于把主题安装好了。整个建站过程耗时两晚，然而真正有价值的时间大概只有不到一个小时。本来的目的是开始记录自己学习编程的过程，结果创建博客就折腾了这么久，有点哭笑不得。 讲道理来说如今科技进步这么快理应出现各种傻瓜包，一个按键就解决所有问题。看来这种建站工具还是没能强大到这一点。从另一方面说明我对前端的构建工具一点也不熟悉。想想如果是导入个jar包或者import一个项目的话，即便没用过也不至于花这">
+
+<link rel="canonical" href="https://nechadil.github.io/2018/06/26/一次艰难的创站经历/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一次艰难的创站经历 | Nechadil</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nechadil</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nechadil.github.io/2018/06/26/一次艰难的创站经历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nechadil">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nechadil">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一次艰难的创站经历
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-26 23:44:02" itemprop="dateCreated datePublished" datetime="2018-06-26T23:44:02+02:00">2018-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 22:10:27" itemprop="dateModified" datetime="2020-03-23T22:10:27+01:00">2020-03-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>终于把主题安装好了。整个建站过程耗时两晚，然而<strong>真正</strong>有价值的时间大概只有不到一个小时。本来的目的是开始记录自己学习编程的过程，结果创建博客就折腾了这么久，有点哭笑不得。</p>
+<p>讲道理来说如今科技进步这么快理应出现各种傻瓜包，一个按键就解决所有问题。看来这种建站工具还是没能强大到这一点。从另一方面说明我对前端的构建工具一点也不熟悉。想想如果是导入个jar包或者import一个项目的话，即便没用过也不至于花这么久时间才完成目的。</p>
+<p>一个比较有趣的事情是我没有选择github推荐的Jekyll（直到现在我也没弄明白这个词该怎么读）。由于官方不推荐在windows下安装，于是我在虚拟机上鼓捣了半天。先是用之前装的CentOS。结果花了好久的时间配置之后响应速度还是令人窒息。于是我又重新打开了Ubuntu。Ubuntu的桌面上还留着我16年写的C程序。而且因为是在挂起状态所以启动的瞬间让我也是有点恍惚，像是忽然回到了两年前的时光，时间一下在那个时刻定格了一样。所以计算机这个东西还是有点邪门的，这种印象可不是看看过去读过的书就能体会到的。总之唏嘘完之后我发现原因就是电脑的问题而不是虚拟机的问题。在浏览器和shell间切换的时候我感觉自己仿佛回到了1998年，那个时候什么都慢。网速低得能让你在图片加载的过程中身体由软变硬，再由硬变软。。。也不知道硬件升级都升级到哪了，资源全被傻逼windows给吃了。是时候把购买Mac提上日程了。我还是忘不了当年从南大退学回寝室的时候，看我之前的室友买了个Mac结果装了个windows系统。。。</p>
+<p>好像有点跑题了。正经的事就是我运行shell的时候发现（其实是后来才发现）我的系统版本太低了，用<code>apt-get install</code>命令的时候系统提示有些文件无法验证，选择继续之后就是有些文件无法获取。这个时候我犯了一个过去就经常犯的错误，<strong>在发现解决方案看似有些复杂的时候轻易就想着逃避到另一种方案</strong>。网上给出的解决办法是手动吧apt的软件获取地址改成<em>oldrelease</em>开头的一个地址。最后证明得益于Linux命令行的强大，加起来一共不到六步操作。但是不懂linux的结果就是要手动改每一个地址。想想就头大。于是我想着能不能手动下载然后用makefile安装。结果Ruby安装过程还算顺利，虽然也是一堆warning，但总算给安装完了。Rubygem也是以次方式安装的。结果最后一步安装Jekyll的时候提示说少一个z**lib的压缩库？于是心态彻底爆炸，去吃了两包炸酱面。。。结果就是该走的坑终归要走。硬着头皮查了怎么解决旧版本url地址的问题，结果打了几行命令就搞定了。虽然最后还是没能解决安装Jekyll的问题，但是至少到那一步问题就不是之前那么简单了。github上有个人评论出这种问题是因为Ruby屎一样的依赖引用，所以即便只用一个版本也最好用Ruby的版本管理器来安装Ruby。我想想还是算了，第一次和Ruby的接触即便没什么大收获也算是窥见到这类脚本语言的尿性了，于是去查了下Hexo和Jekyll的对比。发现Hexo没有Jekyll那么多的依赖包，同时在windows下运行没有问题。这里要提一句就是我之前复制粘贴异常信息的时候如果搜中文经常能搜到分析了半天加上连篇的截屏结果最后结论是网络连接问题。。。卧槽。我当时的想法是想骂他一顿，当然是心里默骂。但是转念一想，自己也开始写博客了。究竟是该接着骂然后自己把博客写的更精致些呢还是屏蔽掉搜索引擎然后接着骂呢？还是说，从逻辑的角度，如果不能证明人家写这个东西就是为了让别人搜索到的，就没办法骂他，甚至也不该生气或者觉得这个人愚蠢。但是这么一本正经分析和记录解决方案到网上结果结论是网络连接故障。。。。。。我觉得还是no comment的态度好一点。其实大多数情况下我还是这些博客狂的受益者，虽然要花大量的时间筛选掉垃圾信息。国外的网站如果想来救急就相对没那么容易。除非问答网站正好问到自己心里去了。好像很少有人写垃圾博客的样子。这一点值得思考。我还是找时间看看怎么屏蔽搜索引擎好了。虽然这种脚本生成的网站不知道能不能像普通网站一样实现。</p>
+<p>恩，总之一步步照着一个博客用Hexo实现了个人主页，在这两个晚上的最后一个小时之内。虽然中途碰到了久违的SSH认证的问题和因为漏掉一步操作污心烦躁于是删了项目重建耽误了一小点时间，总之事情是顺利解决了。其实仔细想想最重要的还真的是基础知识和知识面的问题，否则即便是从来没接触过的东西只要有相关经验还是很好想通的，比如linux，git，脚本语言这些东西，接触过之后大致也能明白安装的流程大概都是什么意思，这样碰到问题也知道该从哪下手。毕竟软件安装不像是家电安装，异常的情况还是挺容易出现的。所以从这个经历来看，到底是linux的用户体验好还是windows的用户体验好呢？我思考了十秒钟的结论是Java的用户体验还是很不错的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/28/第一阶段的学习/" rel="next" title="第一阶段的学习">
+      第一阶段的学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Nechadil</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nechadil</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nechadil.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Chapter 6 Interfaces and Inner Classes6.1 Interfaces Accessibility  all methods are public  all fields are public static final  不要写访问符 一个interface变量要指向一个具体的实例  6.2 Cloning protected Object.clone( ) mu">
+<meta name="keywords" content="Core Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core Java (Chpater 6)">
+<meta property="og:url" content="https://nechadil.github.io/2018/07/13/Core-Java-Chpater-6/index.html">
+<meta property="og:site_name" content="Nechadil">
+<meta property="og:description" content="Chapter 6 Interfaces and Inner Classes6.1 Interfaces Accessibility  all methods are public  all fields are public static final  不要写访问符 一个interface变量要指向一个具体的实例  6.2 Cloning protected Object.clone( ) mu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-23T21:10:27.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Core Java (Chpater 6)">
+<meta name="twitter:description" content="Chapter 6 Interfaces and Inner Classes6.1 Interfaces Accessibility  all methods are public  all fields are public static final  不要写访问符 一个interface变量要指向一个具体的实例  6.2 Cloning protected Object.clone( ) mu">
+
+<link rel="canonical" href="https://nechadil.github.io/2018/07/13/Core-Java-Chpater-6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Core Java (Chpater 6) | Nechadil</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nechadil</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nechadil.github.io/2018/07/13/Core-Java-Chpater-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nechadil">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nechadil">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Core Java (Chpater 6)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-13 19:12:23" itemprop="dateCreated datePublished" datetime="2018-07-13T19:12:23+02:00">2018-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 22:10:27" itemprop="dateModified" datetime="2020-03-23T22:10:27+01:00">2020-03-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Chapter-6-Interfaces-and-Inner-Classes"><a href="#Chapter-6-Interfaces-and-Inner-Classes" class="headerlink" title="Chapter 6 Interfaces and Inner Classes"></a>Chapter 6 Interfaces and Inner Classes</h3><h4 id="6-1-Interfaces"><a href="#6-1-Interfaces" class="headerlink" title="6.1 Interfaces"></a>6.1 Interfaces</h4><ul>
+<li>Accessibility<br>  all methods are <em>public</em><br>  all fields are <em>public static final</em><br>  不要写访问符</li>
+<li>一个interface变量要指向一个具体的实例</li>
+</ul>
+<h4 id="6-2-Cloning"><a href="#6-2-Cloning" class="headerlink" title="6.2 Cloning"></a>6.2 Cloning</h4><ul>
+<li>protected Object.clone( )<ul>
+<li>mutable 类型克隆的结果还是指向同一对象的引用，所以需要重写。</li>
+<li>因为是protected所以只能克隆自己的对象。如果属性包括其他对象则不能克隆。</li>
+</ul>
+</li>
+<li>使用Cloneable接口进行deep clone<ul>
+<li>实现clone方法，访问权限为public。</li>
+<li>方法内对调用自身属性的clone方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-3-Interfaces-and-Callbacks"><a href="#6-3-Interfaces-and-Callbacks" class="headerlink" title="6.3 Interfaces and Callbacks"></a>6.3 Interfaces and Callbacks</h4><ul>
+<li>这种callback原理就是在功能类中参数是接口而不是具体实现。在实际使用时传入一个该接口的实现类。这样降低了类之间的耦合。</li>
+</ul>
+<h4 id="6-4-Inner-Classes"><a href="#6-4-Inner-Classes" class="headerlink" title="6.4 Inner Classes"></a>6.4 Inner Classes</h4><ul>
+<li><p>为什么要用内部类？</p>
+<ul>
+<li>可以直接使用外部类private域<ul>
+<li>可访问外部类和自身域</li>
+<li>编译器自动在内部类构造方法中添加外部类引用来实现对外部类的访问</li>
+</ul>
+</li>
+<li><p>其他类不可见</p>
+<ul>
+<li>只有内部类才能使用private访问符</li>
+<li><p>如果内部类为public，可这样新建内部类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OutterClass outerObject = <span class="keyword">new</span> OutterClass();</span><br><span class="line">InnerClass innerObject = outerObject.<span class="keyword">new</span> InnerClass();</span><br></pre></td></tr></table></figure>
+<p>用此可见内部类的创建需要包含一个外部类的实例。</p>
+</li>
+</ul>
+</li>
+<li>匿名内部类方便定义callback</li>
+</ul>
+</li>
+<li>编译器对内部类的实现<ul>
+<li>就是简单的一个类，名为InnerClass$OuterClass</li>
+<li>内部类多出一个域用来引用外部类：final OuterClass <strong>this$0</strong>；</li>
+<li>内部类访问外部类域：<ul>
+<li>外部类多出一个静态方法：static Type  <strong>access$0</strong>(OuterClass o);</li>
+<li>访问时执行access$0(this$0);</li>
+</ul>
+</li>
+<li>private InnerClass实现：default访问权限 + private构造方法</li>
+</ul>
+</li>
+<li>Local Inner Class<ul>
+<li>在方法内定义Class</li>
+<li><strong>不带访问符!!!</strong> 方法内有效</li>
+<li>优点是甚至对外部类隐藏。只有外部方法才能访问</li>
+<li>可访问方法的参数，但参数在方法中必须声明final。原因：<br>  该参数会被编译器加在内部类中作为一个属性。<br>  需要保证该属性和参数在引用同样的数据，所以要定义成final，即不能被更改。</li>
+<li><strong>数组被定义为final仍可以更改其中的数据</strong></li>
+</ul>
+</li>
+<li><p>Anonymous Inner Class<br>  新建一个匿名内部类实例</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新建一个继承SuperClass类的匿名内部类。</span></span><br><span class="line"><span class="keyword">new</span> SuperClass(construction parameters) &#123;</span><br><span class="line">	inner <span class="class"><span class="keyword">class</span> <span class="title">methods</span> <span class="title">and</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#125;</span></span><br><span class="line"><span class="class">// 新建接口实现没有参数</span></span><br><span class="line"><span class="class"><span class="title">new</span> <span class="title">Interface</span>() </span>&#123;</span><br><span class="line">	inner <span class="class"><span class="keyword">class</span> <span class="title">methods</span> <span class="title">and</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#125;</span></span><br><span class="line"><span class="class">// 匿名内部类没有构造方法，如果是第一种继承父类的内部类，需使用父类的构造方法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>double brace initialization<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 外层中括号表示匿名内部类，内层中括号是对象初始化时执行的代码块</span></span><br><span class="line">ArrayList&lt;String&gt; a = <span class="keyword">new</span> ArrayList&lt;String&gt; &#123;&#123;add(<span class="string">"a"</span>);add(<span class="string">"b"</span>);&#125;&#125; ;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>static inner class</p>
+<ul>
+<li>用于不需要访问外界对象的内部类。</li>
+<li>只为外部类服务（比如一个类中一个返回最大值最小值的方法，新建一个静态内部类Pair，储存最大最小值，只用于这个类，没必要在包内新建一个类）</li>
+<li>接口内的内部类都是自动public static的</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-5-Dynamic-Proxy"><a href="#6-5-Dynamic-Proxy" class="headerlink" title="6.5  Dynamic Proxy"></a>6.5  Dynamic Proxy</h4><p>书里讲的完全看不懂。。。但是在网上找到了<a href="http://www.cnblogs.com/xdp-gacl/p/3971367.html" target="_blank" rel="noopener">这篇文章</a>，教你如何找刘德华唱歌跳舞。写得很好。</p>
+<ul>
+<li>总的来说分三个部分。一个是接口，比如“会表演”。一个实现类，比如“演员”。一个代理类，比如“经纪人”</li>
+<li>在经纪人方法内用Proxy.getNewInstance(ClassLoader classLoader,Interface[] interfaces,InvocationHandler handler)方法获取演员的代理，方法内的interface即为实现类实现的接口。</li>
+<li>InvocationHandler实例即为具体的处理者<strong>接口</strong>。实现InvocationHandler时需要重写invoke(proxy, method, args)方法。其中method即为调用的接口的某一方法。可在method.invoke()前后增加操作（如果不加method.invoke()则实现类的方法不再执行）</li>
+</ul>
+<blockquote>
+<p>学习笔记<br>12/07/2018 (P272 ~ P299)<br>花了很多时间在单位学习，已经到了300页了。之前估计在内部类那个部分即使是汉语版也看不太懂。现在已经可以明白作者在说什么了。之后如果有相关经验再回过头来看应该会更清晰了。<br>13/07/2018（P300 ~ P314 ）<br>arrayList的初始化jeremie 之前在代码里用过，原来是这么回事啊！之前还以为是什么特殊的语法糖。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Core-Java/" rel="tag"># Core Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/12/Core-Java-Chpater-5/" rel="prev" title="Core java (Chpater 5)">
+      <i class="fa fa-chevron-left"></i> Core java (Chpater 5)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/23/Docker cheat sheet/" rel="next" title="Docker cheat sheet">
+      Docker cheat sheet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-6-Interfaces-and-Inner-Classes"><span class="nav-number">1.</span> <span class="nav-text">Chapter 6 Interfaces and Inner Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-Interfaces"><span class="nav-number">1.1.</span> <span class="nav-text">6.1 Interfaces</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-Cloning"><span class="nav-number">1.2.</span> <span class="nav-text">6.2 Cloning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-Interfaces-and-Callbacks"><span class="nav-number">1.3.</span> <span class="nav-text">6.3 Interfaces and Callbacks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-Inner-Classes"><span class="nav-number">1.4.</span> <span class="nav-text">6.4 Inner Classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-Dynamic-Proxy"><span class="nav-number">1.5.</span> <span class="nav-text">6.5  Dynamic Proxy</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Nechadil</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nechadil</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
